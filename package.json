@@ -1,0 +1,43 @@
+{
+    "name": "api-testing-playground",
+    "version": "1.0.0",
+    "description": "A skeletong repository to build basic API testing framework.",
+    "scripts": {
+        "test": "mocha  --reporter mochawesome --reporter-options reportDir=report,json=false",
+        "lint": "eslint . --fix",
+        "clean": "rimraf ./report"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sorosz89/service-testing-skeleton.git"
+    },
+    "keywords": [
+        "API",
+        "Testing"
+    ],
+    "author": "os.sandor@gmail.com",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sorosz89/service-testing-skeleton/issues"
+    },
+    "homepage": "https://github.com/sorosz89/service-testing-skeleton#readme",
+    "mocha": {
+        "reporter": "mochawesome"
+    },
+    "dependencies": {
+        "axios": "^0.20.0",
+        "chai": "^4.2.0",
+        "mocha": "^8.1.3",
+        "mochawesome": "^6.1.1",
+        "rimraf": "^3.0.2"
+    },
+    "devDependencies": {
+        "eslint": "^7.9.0",
+        "husky": "^4.3.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint"
+        }
+    }
+}
