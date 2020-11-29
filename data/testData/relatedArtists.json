@@ -1,0 +1,16 @@
+[
+    {
+        "artistID": "43ZHCT0cAZBISjO8DG9PnE",
+        "output": {
+            "name":["Buddy Holly","Jerry Lee Lewis","Chuck Berry","Roy Orbison","The Everly Brothers","Eddie Cochran","Bill Haley & His Comets","Little Richard","Ricky Nelson","Ritchie Valens","Fats Domino","The Platters","Neil Sedaka","Chubby Checker","The Drifters","Bobby Darin","The Righteous Brothers","Dion","Connie Francis"]
+        },
+        "description": "Valid artist Id"
+    },
+    {
+        "artistID": "43ZHCT0cAZBISjO8DG9PnE",
+        "output": {
+            "name":["Buddy Holly","Jerry Lee Lewis","Chuck Berry","Roy Orbison","The Everly Brothers","Eddie Cochran","Bill Haley & His Comets","Little Richard","Ricky Nelson","Ritchie Valens","Fats Domino","The Platters","Neil Sedaka","Chubby Checker","The Drifters","Bobby Darin","The Righteous Brothers","Dion","Connie Francis"]
+        },
+        "description": "Valid artist Id"
+    }
+]

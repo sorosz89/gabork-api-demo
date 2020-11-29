@@ -109,3 +109,6 @@ report
 # IDE
 .idea
 .vscode
+TASKS.MD
+Decision table.xlsx
+tasks2.md

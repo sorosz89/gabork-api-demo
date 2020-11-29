@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {"type": "string"},
+    "popularity": {"type": "integer", "minimum": 1},
+    "type": {"type": "string"},
+    "uri": {"type": "string"},
+    "id": {"type": "string"},
+    "external_urls": {"type": "object"},
+    "followers": { "type": "object"},
+    "genres": {"type": "array"},
+    "href":{"type": "string"}
+  },
+  "required": [
+    "name",
+    "popularity",
+    "type",
+    "uri",
+    "id"
+  ]
+}

@@ -110,7 +110,7 @@
         "no-labels": "error",
         "no-lone-blocks": "error",
         "no-lonely-if": "error",
-        "no-loop-func": "error",
+        "no-loop-func": "warn",
         "no-magic-numbers": [
             "warn",
             {
