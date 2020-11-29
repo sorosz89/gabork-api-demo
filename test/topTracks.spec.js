@@ -37,7 +37,7 @@ describe("Get an Artist's Top Tracks", () => {
         expect(await schemaValidation(responseData, artistsSchema)).to.be.true;
     });
 
-    it(`should return the Artist's top track`, async () => {
+    it("should return the Artist's top track", async () => {
         const selectedArtist = randomItem(testData);
         // eslint-disable-next-line max-len
         const response = await spotify.get(`${constants.getAnArtistUrl}${selectedArtist.artistID}${constants.getTopTracks}${constants.getTopTracksMarket}${selectedArtist.market}`);
