@@ -1,0 +1,34 @@
+[
+    {
+        "artistID": "",
+        "output": {
+            "message": "invalid id",
+            "status": "BAD_REQUEST"
+        },
+        "description": "Empty artist ID"
+    },
+    {
+        "artistID": "0DbbnkFMhhDvinDYIihGab",
+        "output": {
+            "message": "non existing id",
+            "status": "NOT_FOUND"
+        },
+        "description": "Valid non existing artist ID"
+    },
+    {
+        "artistID": "80081356942099988877766",
+        "output": {
+            "message": "invalid id",
+            "status": "BAD_REQUEST"
+        },
+        "description": "Only numbers"
+    },
+    {
+        "artistID": "?",
+        "output": {
+            "message": "invalid id",
+            "status": "BAD_REQUEST"
+        },
+        "description": "Reserved Character (symbol that cannot be used in api call)"
+    }
+]
