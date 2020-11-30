@@ -100,7 +100,5 @@ describe("Spotify API test", () => {
                 .catch(err => err.response);
             expect(response.status).to.be.equal(StatusCodes.BAD_REQUEST);
         });
-
-        // TODO: check for array with 3 elements
     });
 });
