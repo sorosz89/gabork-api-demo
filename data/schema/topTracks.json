@@ -57,17 +57,6 @@
                                         }
                                     ]
                                 },
-                                "external_urls": {
-                                    "type": "object",
-                                    "properties": {
-                                        "spotify": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "spotify"
-                                    ]
-                                },
                                 "href": {
                                     "type": "string"
                                 },
@@ -77,44 +66,6 @@
                                 "images": {
                                     "type": "array",
                                     "items": [
-                                        {
-                                            "type": "object",
-                                            "properties": {
-                                                "height": {
-                                                    "type": "integer"
-                                                },
-                                                "url": {
-                                                    "type": "string"
-                                                },
-                                                "width": {
-                                                    "type": "integer"
-                                                }
-                                            },
-                                            "required": [
-                                                "height",
-                                                "url",
-                                                "width"
-                                            ]
-                                        },
-                                        {
-                                            "type": "object",
-                                            "properties": {
-                                                "height": {
-                                                    "type": "integer"
-                                                },
-                                                "url": {
-                                                    "type": "string"
-                                                },
-                                                "width": {
-                                                    "type": "integer"
-                                                }
-                                            },
-                                            "required": [
-                                                "height",
-                                                "url",
-                                                "width"
-                                            ]
-                                        },
                                         {
                                             "type": "object",
                                             "properties": {

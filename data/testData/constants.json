@@ -1,8 +1,7 @@
 {
     "getAnArtistUrl":"/artists/",
     "getSeveralArtists":"/artists?ids=",
-    "getAlbumsUrl":"/albums",
     "getRelatedArtists":"/related-artists",
     "getTopTracks":"/top-tracks",
-    "getTopTracksMarket":"?market="
+    "tracksMarket":"?market="
 }

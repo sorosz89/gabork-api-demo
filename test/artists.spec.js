@@ -25,22 +25,21 @@ describe("Spotify API test", () => {
 
         it("should return a valid response", async () => {
             const selectedArtist = randomItem(testData);
-            const response = await spotify.get(constants.getAnArtistUrl + selectedArtist.artistID);
-            const responseData = response.data;
-            expect(await schemaValidation(responseData, artistsSchema)).to.be.true;
+            const response = await spotify.get(`${constants.getAnArtistUrl}${selectedArtist.artistID}`);
+            expect(schemaValidation(response.data, artistsSchema)).to.be.true;
         });
 
         it("should return the artist name by id", async () => {
             const selectedArtist = randomItem(testData);
-            const response = await spotify.get(constants.getAnArtistUrl + selectedArtist.artistID);
+            const response = await spotify.get(`${constants.getAnArtistUrl}${selectedArtist.artistID}`);
             expect(response.data.name).to.be.equal(selectedArtist.output.name);
         });
 
         // outline
         for (const artist of invalidTestData) {
-            it(`should return the proper error code in case of invalid id: " ${artist.artistID}`, async () => {
+            it(`should return the proper error code in case of invalid id: ${artist.artistID}`, async () => {
                 const response = await spotify
-                    .get(constants.getAnArtistUrl + artist.artistID)
+                    .get(`${constants.getAnArtistUrl}${artist.artistID}`)
                     .catch(err => err.response);
                 const statusCode = StatusCodes[artist.output.status];
                 expect(response.status).to.be.equal(statusCode);
@@ -51,7 +50,7 @@ describe("Spotify API test", () => {
         for (const artist of invalidTestData) {
             it(`should return the proper error message in case of invalid id: ${artist.artistID}`, async () => {
                 const response = await spotify
-                    .get(constants.getAnArtistUrl + artist.artistID)
+                    .get(`${constants.getAnArtistUrl}${artist.artistID}`)
                     .catch(err => err.response);
                 expect(response.data.error.message).to.be.equal(artist.output.message);
             });
@@ -61,23 +60,47 @@ describe("Spotify API test", () => {
     describe("Get Multiple Artists", () => {
         it("should return the proper status code for more than one ids", async () => {
             const testDataArray = shuffleArray(testData);
-            const artist = await spotify
+            const response = await spotify
                 .get(`${constants.getSeveralArtists}${testDataArray[0].artistID},${testDataArray[1].artistID}`);
-            expect(artist.status).to.be.equal(StatusCodes.OK);
+            expect(response.status).to.be.equal(StatusCodes.OK);
         });
 
         it("should return the proper status code for the same id twice", async () => {
             const selectedArtist = randomItem(testData);
-            // eslint-disable-next-line max-len
-            const artist = await spotify.get(`${constants.getSeveralArtists}${selectedArtist.artistID},${selectedArtist.artistID}`);
-            expect(artist.status).to.be.equal(StatusCodes.OK);
+            const param = selectedArtist.artistID;
+            const response = await spotify.get(`${constants.getSeveralArtists}${param},${param}`);
+            expect(response.status).to.be.equal(StatusCodes.OK);
         });
 
         it("should return the proper status code for three ids", async () => {
             const testDataArray = shuffleArray(testData);
-            // eslint-disable-next-line max-len
-            const artist = await spotify.get(`${constants.getSeveralArtists}${testDataArray[0].artistID},${testDataArray[1].artistID},${testDataArray[2].artistID}`);
-            expect(artist.status).to.be.equal(StatusCodes.OK);
+            const param1 = testDataArray[0].artistID;
+            const param2 = testDataArray[1].artistID;
+            const param3 = testDataArray[2].artistID;
+            const response = await spotify.get(`${constants.getSeveralArtists}${param1},${param2},${param3}`);
+            expect(response.status).to.be.equal(StatusCodes.OK);
         });
+
+        it("should return the proper status code for one wrong ids", async () => {
+            const testDataArray = shuffleArray(testData);
+            const param1 = invalidTestData[0].artistID;
+            const param2 = testDataArray[1].artistID;
+            const param3 = testDataArray[2].artistID;
+            const response = await spotify.get(`${constants.getSeveralArtists}${param1},${param2},${param3}`)
+                .catch(err => err.response);
+            expect(response.status).to.be.equal(StatusCodes.BAD_REQUEST);
+        });
+
+        it("should return the proper status code for three wrong ids", async () => {
+            const testDataArray = shuffleArray(invalidTestData);
+            const param1 = testDataArray[0].artistID;
+            const param2 = testDataArray[1].artistID;
+            const param3 = testDataArray[2].artistID;
+            const response = await spotify.get(`${constants.getSeveralArtists}${param1},${param2},${param3}`)
+                .catch(err => err.response);
+            expect(response.status).to.be.equal(StatusCodes.BAD_REQUEST);
+        });
+
+        // TODO: check for array with 3 elements
     });
 });

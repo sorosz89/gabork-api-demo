@@ -6,7 +6,7 @@ const testData = require("../data/testData/topTracks.json");
 const constants = require("../data/testData/constants.json");
 const artistsSchema = require("../data/schema/topTracks.json");
 const { schemaValidation, randomItem } = require("../todo/spotify/helper/helpers");
-// eslint-disable-next-line no-loop-func
+
 let spotify;
 before(async () => {
     spotify = await init();
@@ -15,15 +15,18 @@ before(async () => {
 describe("Get an Artist's Top Tracks", () => {
     for (const artist of testData) {
         it(`should return the proper status code for : ${artist.artistID}`, async () => {
-            // eslint-disable-next-line max-len
-            const response = await spotify.get(`${constants.getAnArtistUrl}${artist.artistID}${constants.getTopTracks}${constants.getTopTracksMarket}${artist.market}`);
+            const param1 = artist.artistID;
+            const param2 = artist.market;
+            const response = await spotify
+                .get(`${constants.getAnArtistUrl}${param1}${constants.getTopTracks}${constants.tracksMarket}${param2}`);
             expect(response.status).to.be.equal(StatusCodes.OK);
         });
     }
 
     for (const artist of testData) {
         it(`should return the proper status code for missing market: ${artist.artistID}`, async () => {
-            const response = await spotify.get(`${constants.getAnArtistUrl}${artist.artistID}${constants.getTopTracks}`)
+            const response = await spotify
+                .get(`${constants.getAnArtistUrl}${artist.artistID}${constants.getTopTracks}`)
                 .catch(err => err.response);
             expect(response.status).to.be.equal(StatusCodes.BAD_REQUEST);
         });
@@ -31,16 +34,20 @@ describe("Get an Artist's Top Tracks", () => {
 
     it("should return a valid response", async () => {
         const selectedArtist = randomItem(testData);
-        // eslint-disable-next-line max-len
-        const response = await spotify.get(`${constants.getAnArtistUrl}${selectedArtist.artistID}${constants.getTopTracks}${constants.getTopTracksMarket}${selectedArtist.market}`);
+        const param1 = selectedArtist.artistID;
+        const param2 = selectedArtist.market;
+        const response = await spotify
+            .get(`${constants.getAnArtistUrl}${param1}${constants.getTopTracks}${constants.tracksMarket}${param2}`);
         const responseData = response.data;
-        expect(await schemaValidation(responseData, artistsSchema)).to.be.true;
+        expect(schemaValidation(responseData, artistsSchema)).to.be.true;
     });
 
     it("should return the Artist's top track", async () => {
         const selectedArtist = randomItem(testData);
-        // eslint-disable-next-line max-len
-        const response = await spotify.get(`${constants.getAnArtistUrl}${selectedArtist.artistID}${constants.getTopTracks}${constants.getTopTracksMarket}${selectedArtist.market}`);
+        const param1 = selectedArtist.artistID;
+        const param2 = selectedArtist.market;
+        const response = await spotify
+            .get(`${constants.getAnArtistUrl}${param1}${constants.getTopTracks}${constants.tracksMarket}${param2}`);
         expect(response.data.tracks[0].album.name).to.be.equal(selectedArtist.output.album.name[0]);
         expect(response.status).to.be.equal(StatusCodes.OK);
     });

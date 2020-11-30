@@ -10,7 +10,7 @@ const v = new Validator();
  * @returns - a boolean
  */
 
-module.exports.schemaValidation = async (response, schema) => { // eslint-disable-line
+module.exports.schemaValidation = (response, schema) => { // eslint-disable-line
     const validation = v.validate(response, schema);
     const result = validation.valid || validation.errors;
     if (validation.errors.length) {
