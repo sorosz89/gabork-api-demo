@@ -48,7 +48,7 @@ describe("Get an Artist's Top Tracks", () => {
         const response = await spotify
             .get(`${constants.getAnArtistUrl}${param1}${constants.getTopTracks}${constants.tracksMarket}${param2}`);
 
-        const names = response.data.tracks.map(e => e.album.name)
+        const names = response.data.tracks.map(e => e.album.name);
         expect(names).to.include.members(selectedArtist.output.album.name);
     });
 });

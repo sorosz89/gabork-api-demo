@@ -36,8 +36,8 @@ describe("Spotify API test", () => {
             const selectedArtist = randomItem(testData);
             const response = await spotify
                 .get(`${constants.getAnArtistUrl}${selectedArtist.artistID}${constants.getRelatedArtists}`);
-                
-            const names = response.data.artists.map(e => e.name)
+
+            const names = response.data.artists.map(e => e.name);
             expect(names).to.be.eql(selectedArtist.output.name);
         });
 
