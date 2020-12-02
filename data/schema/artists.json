@@ -2,7 +2,7 @@
   "type": "object",
   "properties": {
     "name": {"type": "string"},
-    "popularity": {"type": "integer", "minimum": 1},
+    "popularity": {"type": "integer"},
     "type": {"type": "string"},
     "uri": {"type": "string"},
     "id": {"type": "string"},

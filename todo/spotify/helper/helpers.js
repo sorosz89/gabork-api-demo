@@ -26,4 +26,9 @@ module.exports.schemaValidation = (response, schema) => { // eslint-disable-line
 
 module.exports.randomItem = elements => elements[Math.floor(Math.random() * elements.length)];
 
+/**
+ * This function shuffles the elements of an array.
+ * @returns - returns the shuffled array
+ */
+
 module.exports.shuffleArray = arr => arr.sort(() => Math.random() - 0.5);

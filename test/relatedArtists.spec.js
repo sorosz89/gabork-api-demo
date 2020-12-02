@@ -36,8 +36,9 @@ describe("Spotify API test", () => {
             const selectedArtist = randomItem(testData);
             const response = await spotify
                 .get(`${constants.getAnArtistUrl}${selectedArtist.artistID}${constants.getRelatedArtists}`);
-            expect(response.data.artists[1].name).to.be.equal(selectedArtist.output.name[1]);
-            // TODO: Go through the whole array
+                
+            const names = response.data.artists.map(e => e.name)
+            expect(names).to.be.eql(selectedArtist.output.name);
         });
 
         // outline

@@ -38,8 +38,7 @@ describe("Get an Artist's Top Tracks", () => {
         const param2 = selectedArtist.market;
         const response = await spotify
             .get(`${constants.getAnArtistUrl}${param1}${constants.getTopTracks}${constants.tracksMarket}${param2}`);
-        const responseData = response.data;
-        expect(schemaValidation(responseData, artistsSchema)).to.be.true;
+        expect(schemaValidation(response.data, artistsSchema)).to.be.true;
     });
 
     it("should return the Artist's top track", async () => {
@@ -48,8 +47,9 @@ describe("Get an Artist's Top Tracks", () => {
         const param2 = selectedArtist.market;
         const response = await spotify
             .get(`${constants.getAnArtistUrl}${param1}${constants.getTopTracks}${constants.tracksMarket}${param2}`);
-        expect(response.data.tracks[0].album.name).to.be.equal(selectedArtist.output.album.name[0]);
-        expect(response.status).to.be.equal(StatusCodes.OK);
+
+        const names = response.data.tracks.map(e => e.album.name)
+        expect(names).to.include.members(selectedArtist.output.album.name);
     });
 });
 
