@@ -43,7 +43,7 @@ const getAccessToken = async () => {
 module.exports.init = async () => {
     const { token_type, access_token } = await getAccessToken();
     if (access_token) {
-        //  console.log("Access Token retireved successfully!");
+          console.log("Access Token retireved successfully!");
     }
     return axios.create({
         baseURL,

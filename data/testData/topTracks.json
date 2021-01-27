@@ -19,5 +19,22 @@
                 ]
             }
         }
+    },
+    {
+        "artistID": "5h7CM1X0fjCnsSvwaSQjB0",
+        "market": "HU",
+        "output": {
+            "artistName": "Konyha",
+            "album": {
+                "name": [
+                    "Álomból Vár",
+                    "Földrevaló",
+                    "Álomból Vár",
+                    "Mire vársz?",
+                    "Különbéke",
+                    "Még csak szavak"
+                ]
+            }
+        }
     }
 ]
