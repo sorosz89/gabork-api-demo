@@ -13,7 +13,7 @@ before(async () => {
     spotify = await init();
 });
 
-describe('Spotify API test - Related Artists', () => {
+describe("Spotify API test - Related Artists", () => {
     describe("Get an Artist's Related Artists", () => {
         // outline
         for (const artist of testData) {

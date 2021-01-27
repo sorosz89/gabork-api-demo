@@ -12,7 +12,7 @@ before(async () => {
     spotify = await init();
 });
 
-describe("Spotify API test - Top Tracks", function () {
+describe("Spotify API test - Top Tracks", function outerDesc() {
     this.retries(3);
     describe("Get an Artist's Top Tracks", () => {
         for (const artist of testData) {
