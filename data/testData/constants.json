@@ -3,5 +3,6 @@
     "getSeveralArtists":"/artists?ids=",
     "getRelatedArtists":"/related-artists",
     "getTopTracks":"/top-tracks",
-    "tracksMarket":"?market="
+    "tracksMarket":"?market=",
+    "v1Url":"https://api.spotify.com/v1"
 }

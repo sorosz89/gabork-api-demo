@@ -6,7 +6,9 @@ const { schemaValidation, randomItem, shuffleArray } = require("../todo/spotify/
 const artistsSchema = require("../data/schema/artists.json");
 const testData = require("../data/testData/artistsData.json");
 const invalidTestData = require("../data/testData/artistsDataInvalid.json");
-const { getAnArtistUrl, getSeveralArtists } = require("../data/testData/constants.json");
+const { getAnArtistUrl, getSeveralArtists,v1Url } = require("../data/testData/constants.json");
+
+const { getRequest } = require("../todo/spotify/helper/XMLHttpRequest.js");
 
 let spotify;
 before(async () => {
@@ -15,6 +17,12 @@ before(async () => {
 
 describe("Spotify API test - Artist", () => {
     describe("Get an Artist", () => {
+        it("XHR SHOULD WORK PROPERLY", async () => {
+            const response = await getRequest(`${v1Url}${getAnArtistUrl}${testData.artistID}`);
+            console.log("response was:", response);
+            expect(response.status).to.be.equal(StatusCodes.OK);
+        });
+
         // outline
         for (const artist of testData) {
             it(`should return the proper status code for : ${artist.artistID}`, async () => {
