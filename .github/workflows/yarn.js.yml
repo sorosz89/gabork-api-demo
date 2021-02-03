@@ -1,6 +1,13 @@
 name: Node CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - Implement_the_Spotify_API_test
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
