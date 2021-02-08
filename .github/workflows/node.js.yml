@@ -1,6 +1,9 @@
 name: Node CI
 
-on: [push]
+on:
+  push:
+  schedule:
+    - cron: '0 1 * * *' # run at 1 AM UTC
 
 jobs:
   build:
@@ -11,11 +14,7 @@ jobs:
       matrix:
         node-version: [ 15.x]
 
-    env:
-      SPOTIFY_CLIENT_ID : b34832f0f4f34c6b8b7947174a9023d2
-      SPOTIFY_CLIENT_SECRET : 0ebe459c4b23475bac7a84eb9d0a1875
-
-    steps:
+    steps:          
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
