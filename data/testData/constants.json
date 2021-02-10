@@ -1,8 +1,8 @@
 {
     "getAnArtistUrl":"/artists/",
-    "getSeveralArtists":"/artists?ids=",
-    "getRelatedArtists":"/related-artists",
-    "getTopTracks":"/top-tracks",
-    "tracksMarket":"?market=",
+    "getSeveralArtistsUrl":"/artists?ids=",
+    "getRelatedArtistsUrl":"/related-artists",
+    "getTopTracksUrl":"/top-tracks",
+    "tracksMarketUrl":"?market=",
     "v1Url":"https://api.spotify.com/v1"
 }

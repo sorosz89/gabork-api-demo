@@ -17,7 +17,9 @@
                     "Sandwich",
                     "IV: Revenge of the Vengeance"
                 ]
-            }
+            },
+            "unauthorizedStatus": "UNAUTHORIZED",
+            "unauthorizedMsg": "No token provided"
         }
     },
     {
@@ -34,7 +36,9 @@
                     "Különbéke",
                     "Még csak szavak"
                 ]
-            }
+            },
+            "unauthorizedStatus": "UNAUTHORIZED",
+            "unauthorizedMsg": "No token provided"
         }
     }
 ]

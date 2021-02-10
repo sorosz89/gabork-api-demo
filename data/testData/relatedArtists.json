@@ -4,26 +4,29 @@
         "output": {
             "name": [
                 "Buddy Holly",
-                "Jerry Lee Lewis",
                 "Chuck Berry",
+                "Jerry Lee Lewis",
                 "Roy Orbison",
                 "The Everly Brothers",
                 "Eddie Cochran",
                 "Bill Haley & His Comets",
                 "Little Richard",
                 "Ricky Nelson",
-                "Ritchie Valens",
                 "Fats Domino",
                 "The Platters",
+                "Ritchie Valens",
                 "Neil Sedaka",
-                "Chubby Checker",
-                "The Drifters",
-                "Bobby Darin",
-                "The Righteous Brothers",
-                "Dion",
                 "Brenda Lee",
-                "Paul Anka"
-            ]
+                "Bobby Darin",
+                "The Drifters",
+                "The Righteous Brothers",
+                "Chubby Checker",
+                "Dion",
+                "Connie Francis"
+            ],
+            "status": "OK",
+            "unauthorizedStatus": "UNAUTHORIZED",
+            "unauthorizedMsg": "No token provided"
         },
         "description": "Valid artist Id"
     },
@@ -37,21 +40,24 @@
                 "Lóci Játszik",
                 "Blahalouisiana",
                 "Rájátszás",
-                "HoneyBeast",
                 "Night Jugglers",
+                "HoneyBeast",
                 "Elefánt",
                 "Majka, Curtis, BLR",
                 "Margaret Island",
                 "Csaknekedkislány",
                 "Bagossy Brothers Company",
-                "Vígszínház Original Cast",
                 "Kávészünet",
-                "Szeder",
+                "Vígszínház Original Cast",
                 "Polar Dear",
                 "Odett",
+                "Szeder",
                 "SPACESH!T",
                 "Patikadomb"
-            ]
+            ],
+            "status": "OK",
+            "unauthorizedStatus": "UNAUTHORIZED",
+            "unauthorizedMsg": "No token provided"
         },
         "description": "Valid artist Id"
     }

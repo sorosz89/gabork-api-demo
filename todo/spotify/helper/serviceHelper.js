@@ -1,33 +1,43 @@
-const { init } = require("../../../todo/spotify/helper/auth");
+const { init,unauth} = require("../../../todo/spotify/helper/auth");
+
 const {
     getAnArtistUrl,
-    getSeveralArtists,
-    getRelatedArtists,
-    tracksMarket,
-    getTopTracks,
+    getSeveralArtistsUrl,
+    getRelatedArtistsUrl,
+    tracksMarketUrl,
+    getTopTracksUrl,
 } = require("../../../data/testData/constants.json");
 
 let spotify;
+let unauthenticated;
 before(async () => {
     spotify = await init();
+    unauthenticated = await unauth();
 });
 
-module.exports.getArtist = id => spotify.get(`${getAnArtistUrl}${id}`);
+const getArtist = id => spotify.get(`${getAnArtistUrl}${id}`);
 
-module.exports.getSeveralArtists = async id => {
-    const getSeveralArtistsResponse = await spotify.get(`${getSeveralArtists}${id}`);
-    // console.debug("getSeveralArtistsResponse:" , getSeveralArtistsResponse)
-    return getSeveralArtistsResponse;
-};
+const getSeveralArtists = (...id) => spotify.get(getSeveralArtistsUrl + id);
 
-module.exports.getRelatedArtists = async id => {
-    const getRelatedArtistsResponse = await spotify.get(`${getAnArtistUrl}${id}${getRelatedArtists}`);
-    // console.debug("getRelatedArtistsResponse:" , getRelatedArtistsResponse)
-    return getRelatedArtistsResponse;
-};
+const getRelatedArtists = id => spotify.get(getAnArtistUrl + id + getRelatedArtistsUrl);
 
-module.exports.getTopTracks = async (id, market) => {
-    const getTopTracksResponse = await spotify.get(`${getAnArtistUrl}${id}${getTopTracks}${tracksMarket}${market}`);
-    // console.debug("getTopTracksResponse:" , getTopTracksResponse)
-    return getTopTracksResponse;
+const getTopTracks = (id, market) => spotify.get(getAnArtistUrl + id + getTopTracksUrl + tracksMarketUrl + market);
+
+const unauthGetArtist = id => unauthenticated.get(getAnArtistUrl + id);
+
+const unauthGetSeveralArtists = (...id) => unauthenticated.get(getSeveralArtistsUrl + id);
+
+const unauthGetRelatedArtists = id => unauthenticated.get(getAnArtistUrl + id + getRelatedArtistsUrl);
+
+const unauthGetTopTracks = id => unauthenticated.get(getAnArtistUrl + id + getTopTracksUrl);
+
+module.exports = {
+    getArtist,
+    getSeveralArtists,
+    getRelatedArtists,
+    getTopTracks,
+    unauthGetArtist,
+    unauthGetSeveralArtists,
+    unauthGetRelatedArtists,
+    unauthGetTopTracks,
 };

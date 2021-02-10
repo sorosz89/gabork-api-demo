@@ -8,20 +8,12 @@
         "description": "Empty artist ID"
     },
     {
-        "artistID": "0DbbnkFMhhDvinDYIihGab",
-        "output": {
-            "message": "non existing id",
-            "status": "NOT_FOUND"
-        },
-        "description": "Valid non existing artist ID"
-    },
-    {
-        "artistID": "80081356942099988877766",
+        "artistID": "0DbbnkFMhhDvinDYIihGab!",
         "output": {
             "message": "invalid id",
             "status": "BAD_REQUEST"
         },
-        "description": "Only numbers"
+        "description": "Valid non existing artist ID with special characters"
     },
     {
         "artistID": "?",

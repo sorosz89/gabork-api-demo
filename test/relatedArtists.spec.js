@@ -5,7 +5,7 @@ const { schemaValidation, randomItem } = require("../todo/spotify/helper/helpers
 const testData = require("../data/testData/relatedArtists.json");
 const invalidTestData = require("../data/testData/relatedArtistsInvalid.json");
 const artistsSchema = require("../data/schema/artists.json");
-const { getRelatedArtists } = require("../todo/spotify/helper/serviceHelper");
+const { getRelatedArtists, unauthGetRelatedArtists } = require("../todo/spotify/helper/serviceHelper");
 
 describe("Spotify API test - Related Artists", () => {
     describe("Get an Artist's Related Artists", () => {
@@ -13,7 +13,8 @@ describe("Spotify API test - Related Artists", () => {
         for (const artist of testData) {
             it(`should return the proper status code: ${artist.artistID}`, async () => {
                 const response = await getRelatedArtists(artist.artistID);
-                expect(response.status).to.be.equal(StatusCodes.OK);
+                const statusCode = StatusCodes[artist.output.status];
+                expect(response.status).to.be.equal(statusCode);
             });
         }
 
@@ -42,5 +43,23 @@ describe("Spotify API test - Related Artists", () => {
                 expect(response.status).to.be.equal(statusCode);
             });
         }
+
+        describe("Unauthenticated", () => {
+            it("should return the proper status code in case of unauthenticated user", async () => {
+                const selectedArtist = randomItem(testData);
+                const response = await unauthGetRelatedArtists(selectedArtist.artistID)
+                    .catch(err => err.response);
+
+                const statusCode = StatusCodes[selectedArtist.output.unauthorizedStatus];
+                expect(response.status).to.be.equal(statusCode);
+            });
+
+            it("should return the proper message in case of unauthenticated user", async () => {
+                const selectedArtist = randomItem(testData);
+                const response = await unauthGetRelatedArtists(selectedArtist.artistID)
+                    .catch(err => err.response);
+                expect(response.data.error.message).to.be.equal(selectedArtist.output.unauthorizedMsg);
+            });
+        });
     });
 });

@@ -5,7 +5,12 @@ const { schemaValidation, randomItem, shuffleArray } = require("../todo/spotify/
 const artistsSchema = require("../data/schema/artists.json");
 const testData = require("../data/testData/artistsData.json");
 const invalidTestData = require("../data/testData/artistsDataInvalid.json");
-const { getArtist, getSeveralArtists } = require("../todo/spotify/helper/serviceHelper");
+const {
+    getArtist,
+    getSeveralArtists,
+    unauthGetArtist,
+    unauthGetSeveralArtists,
+} = require("../todo/spotify/helper/serviceHelper");
 
 describe("Spotify API test - Artist", () => {
     describe("Get an Artist", () => {
@@ -13,7 +18,6 @@ describe("Spotify API test - Artist", () => {
         for (const artist of testData) {
             it(`should return the proper status code for : ${artist.artistID}`, async () => {
                 const response = await getArtist(artist.artistID);
-                // const response = await spotify.get(`${getAnArtistUrl}${artist.artistID}`);
                 expect(response.status).to.be.equal(StatusCodes.OK);
             });
         }
@@ -48,35 +52,61 @@ describe("Spotify API test - Artist", () => {
                 expect(response.data.error.message).to.be.equal(artist.output.message);
             });
         }
+
+        describe("Unauthenticated", () => {
+            it("should return the proper status code in case of unauthenticated user", async () => {
+                const selectedArtist = randomItem(testData);
+                const response = await unauthGetArtist(selectedArtist.artistID)
+                    .catch(err => err.response);
+                const statusCode = StatusCodes[selectedArtist.output];
+                expect(response.data.status).to.be.equal(statusCode);
+            });
+
+            it("should return the proper message in case of unauthenticated user", async () => {
+                const selectedArtist = randomItem(testData);
+                const response = await unauthGetArtist(selectedArtist.artistID)
+                    .catch(err => err.response);
+                expect(response.data.error.message).to.be.equal(selectedArtist.output.unauthorizedMsg);
+            });
+        });
     });
 
     describe("Get Multiple Artists", () => {
         it("should return the proper status code for more than one ids", async () => {
             const testDataArray = shuffleArray(testData);
-            const params = `${testDataArray[0].artistID},${testDataArray[1].artistID}`;
-            const response = await getSeveralArtists(params);
+            const response = await getSeveralArtists(
+                testDataArray[0].artistID,
+                testDataArray[1].artistID,
+            );
             expect(response.status).to.be.equal(StatusCodes.OK);
         });
 
         it("should return the proper status code for the same id twice", async () => {
             const selectedArtist = randomItem(testData);
-            const params = `${selectedArtist.artistID}${selectedArtist.artistID}`;
-            const response = await getSeveralArtists(params);
+            const response = await getSeveralArtists(
+                selectedArtist.artistID,
+                selectedArtist.artistID,
+            );
             expect(response.status).to.be.equal(StatusCodes.OK);
         });
 
         it("should return the proper status code for three ids", async () => {
             const testDataArray = shuffleArray(testData);
-            const params = `${testDataArray[0].artistID},${testDataArray[1].artistID},${testDataArray[2].artistID}`;
-            const response = await getSeveralArtists(params);
+            const response = await getSeveralArtists(
+                testDataArray[0].artistID,
+                testDataArray[1].artistID,
+                testDataArray[2].artistID,
+            );
             expect(response.status).to.be.equal(StatusCodes.OK);
         });
 
         it("should return the proper the proper artist name in case of three valid id", async () => {
             const testDataArray = shuffleArray(testData);
-            const params = `${testDataArray[0].artistID},${testDataArray[1].artistID},${testDataArray[2].artistID}`;
-            const response = await getSeveralArtists(params);
-
+            const response = await getSeveralArtists(
+                testDataArray[0].artistID,
+                testDataArray[1].artistID,
+                testDataArray[2].artistID,
+            );
             const responseNames = response.data.artists.map(e => e.name);
             const testDataNames = testDataArray.map(e => e.output.name);
             expect(responseNames).to.be.eql(testDataNames);
@@ -84,18 +114,53 @@ describe("Spotify API test - Artist", () => {
 
         it("should return the proper status code for one wrong ids", async () => {
             const testDataArray = shuffleArray(testData);
-            const params = `${invalidTestData[0].artistID},${testDataArray[0].artistID},${testDataArray[1].artistID},${testDataArray[2].artistID}`; // eslint-disable-line
-            const response = await getSeveralArtists(params)
+            const invTestDataArray = shuffleArray(invalidTestData);
+
+            const response = await getSeveralArtists(
+                invTestDataArray[0].artistID,
+                testDataArray[1].artistID,
+                testDataArray[2].artistID,
+            )
                 .catch(err => err.response);
+
             expect(response.status).to.be.equal(StatusCodes.BAD_REQUEST);
         });
 
         it("should return the proper status code for three wrong ids", async () => {
             const testDataArray = shuffleArray(invalidTestData);
-            const params = `${testDataArray[0].artistID},${testDataArray[1].artistID},${testDataArray[2].artistID}`;
-            const response = await getSeveralArtists(params)
+            const response = await getSeveralArtists(
+                testDataArray[0].artistID,
+                testDataArray[1].artistID,
+                testDataArray[2].artistID,
+            )
                 .catch(err => err.response);
             expect(response.status).to.be.equal(StatusCodes.BAD_REQUEST);
+        });
+
+        describe("Unauthenticated", () => {
+            it("should return the proper status code in case of unauthenticated user", async () => {
+                const testDataArray = shuffleArray(testData);
+                const response = await unauthGetSeveralArtists(
+                    testDataArray[0].artistID,
+                    testDataArray[1].artistID,
+                    testDataArray[2].artistID,
+                )
+                    .catch(err => err.response);
+
+                const statusCode = StatusCodes[testDataArray[0].output.unauthorizedStatus];
+                expect(response.status).to.be.equal(statusCode);
+            });
+
+            it("should return the proper message in case of unauthenticated user", async () => {
+                const testDataArray = shuffleArray(testData);
+                const response = await unauthGetSeveralArtists(
+                    testDataArray[0].artistID,
+                    testDataArray[1].artistID,
+                    testDataArray[2].artistID,
+                )
+                    .catch(err => err.response);
+                expect(response.data.error.message).to.be.equal(testDataArray[0].output.unauthorizedMsg);
+            });
         });
     });
 });

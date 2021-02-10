@@ -52,3 +52,14 @@ module.exports.init = async () => {
         },
     });
 };
+
+/**
+ * Calls with non existing tokens.
+ *
+ * @returns {Promise.<AxiosInstance>}
+ */
+module.exports.unauth = () => axios.create({
+    baseURL,
+    headers: {},
+});
+

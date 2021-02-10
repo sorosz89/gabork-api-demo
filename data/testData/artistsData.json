@@ -3,7 +3,9 @@
         "artistID": "0DbbnkFMhhDvinDYIiHhGS",
         "output": {
             "name": "Royal Republic",
-            "status": "OK"
+            "status": "OK",
+            "unauthorizedStatus": "UNAUTHORIZED",
+            "unauthorizedMsg": "No token provided"
         },
         "description": "Valid artist Id"
     },
@@ -11,7 +13,9 @@
         "artistID": "5lkEJtA6Y1CVR1HP6hhYLN",
         "output": {
             "name": "Heroic",
-            "status": "OK"
+            "status": "OK",
+            "unauthorizedStatus": "UNAUTHORIZED",
+            "unauthorizedMsg": "No token provided"
         },
         "description": "Valid artist Id"
     },
@@ -19,7 +23,9 @@
         "artistID": "1co4F2pPNH8JjTutZkmgSm",
         "output": {
             "name": "Ramones",
-            "status": "OK"
+            "status": "OK",
+            "unauthorizedStatus": "UNAUTHORIZED",
+            "unauthorizedMsg": "No token provided"
         },
         "description": "Valid artist Id"
     }
