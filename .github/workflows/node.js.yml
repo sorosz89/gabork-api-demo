@@ -1,6 +1,9 @@
 name: Node CI
 
-on: [push]
+on:
+  push:
+  schedule:
+    - cron: '0 1 * * *' # run at 1 AM UTC
 
 jobs:
   build:

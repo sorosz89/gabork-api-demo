@@ -14,10 +14,18 @@ yarn install
 
 ## Usage
 
-### Running the tests
+### Running the tests and reporting
+
+Running the tests with "yarn test" creates a report on the console and creates a html report to the report folder using mochawesome.
 
 ``` bash
 yarn test
+```
+
+An additional reporter can be created using the mocha-junit-reporter:
+
+``` bash
+yarn test --reporter mocha-junit-reporter
 ```
 
 ### eslint fix
