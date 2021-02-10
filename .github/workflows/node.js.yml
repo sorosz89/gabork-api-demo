@@ -16,6 +16,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: running tests
+      uses: ashley-taylor/junit-report-annotations-action@master
+      with:
+        access-token: ${{ secrets.GITHUB_TOKEN }}
     - run: yarn install
     - run: yarn test
     env:
