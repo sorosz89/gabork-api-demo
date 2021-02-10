@@ -16,12 +16,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: running tests
-      uses: ashley-taylor/junit-report-annotations-action@master
+    - run: yarn install
+    - run: yarn test --reporter mocha-junit-reporter
+    - uses: ashley-taylor/junit-report-annotations-action@master
       with:
         access-token: ${{ secrets.GITHUB_TOKEN }}
-    - run: yarn install
-    - run: yarn test
+        report_paths: '**/**/test-results.xml'
     env:
         SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
         SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
