@@ -32,8 +32,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Report
-      uses: ashley-taylor/junit-report-annotations-action@master
+    - name: Build with Maven
+      run: mvn -B test --file test-results.xml
+    - uses: ashley-taylor/junit-report-annotations-action@master
       with:
         access-token: ${{ secrets.GITHUB_TOKEN }}
-      if: always()  
+      if: always()
