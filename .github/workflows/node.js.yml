@@ -26,19 +26,14 @@ jobs:
         SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
         SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
 
-  test:
-      runs-on: ubuntu-latest
-      steps:
-          - uses: actions/checkout@v2.0.0
-          - uses: actions/setup-node@v1
-          - with:
-              node-version: '12.x'
-          - run: npm ci
-          - run: npm test
-            # Please replace "master" with the latest git tag
-          - uses: check-run-reporter/action@v2.0.0
-            # always run, otherwise you'll only see results for passing builds
-            if: ${{ always() }}
-            with:
-              token: 2b7ec9b2-9d78-4f8d-a17d-e86e1ae1049d
-              report: 'reports/junit/**/*.xml'
+  report:
+    needs: build
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Report
+    - uses: ashley-taylor/junit-report-annotations-action@master
+      with:
+        access-token: ${{ secrets.GITHUB_TOKEN }}
+      if: always()
