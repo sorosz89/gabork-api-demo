@@ -21,10 +21,17 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn install
     - run: yarn test --reporter mocha-junit-reporter
+    env:
+        SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+        SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+
+  report:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Report
     - uses: ashley-taylor/junit-report-annotations-action@master
       with:
         access-token: ${{ secrets.GITHUB_TOKEN }}
         path: 'test-results.xml'
-    env:
-        SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
-        SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
