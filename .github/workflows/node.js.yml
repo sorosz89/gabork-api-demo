@@ -27,6 +27,7 @@ jobs:
         SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
 
   report:
+    needs: build
     
     runs-on: ubuntu-latest
     
