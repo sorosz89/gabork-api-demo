@@ -31,7 +31,7 @@ jobs:
     
     steps:
     - name: Report
-    - uses: ashley-taylor/junit-report-annotations-action@master
+      uses: ashley-taylor/junit-report-annotations-action@master
       with:
         access-token: ${{ secrets.GITHUB_TOKEN }}
         path: 'test-results.xml'
