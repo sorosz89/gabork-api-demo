@@ -3,7 +3,7 @@ name: Node CI
 on:
   push:
   schedule:
-    - cron: '0 14 * * *' # run at 14 AM UTC
+    - cron: '0 14 * * *' # run at 2 PM
 
 jobs:
   build:
@@ -20,11 +20,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install
-    - run: yarn test --reporter mocha-junit-reporter
-    - uses: ashley-taylor/junit-report-annotations-action@master
-      with:
-        access-token: ${{ secrets.GITHUB_TOKEN }}
-        path: '**/**/test-results.xml'
+    - run: yarn test
     env:
         SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
         SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
