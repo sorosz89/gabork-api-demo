@@ -2,8 +2,11 @@ name: Node CI
 
 on:
   push:
+    branches:
+      - master
+      - Implement_the_Spotify_API_test
   schedule:
-    - cron: '0 1 * * *' # run at 1 AM UTC
+    - cron: '0 14 * * *' # run at 14 AM UTC
 
 jobs:
   build:
