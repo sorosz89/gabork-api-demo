@@ -31,7 +31,7 @@ describe("Spotify API test - Artist", () => {
         it("should return the artist name by id", async () => {
             const selectedArtist = randomItem(testData);
             const response = await getArtist(selectedArtist.artistID);
-            expect(response.data.name).not.to.be.equal(selectedArtist.output.name);
+            expect(response.data.name).to.be.equal(selectedArtist.output.name);
         });
 
         // outline
